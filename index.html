@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- This link is for React object, used to create component -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- This link is for ReactDOM , used for manipulating DOM -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script>
+      function Clock() {
+        const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+        React.useEffect(function () {
+          // after every 1000ms, update the time
+          setInterval(
+            () => setTime(new Date().toLocaleTimeString()), // expects a function here
+            1000
+          );
+        }, []);
+
+        // Here we're creating a component using createElement because we can not use
+        // JSX here. We can use JSX because of babel.
+        return React.createElement(
+          "header", // tag name
+          null,
+          `Hello React ! It is ${time} 'o clock` // children
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(Clock));
+    </script>
+  </body>
+</html>
